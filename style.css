@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffebf1;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.quiz-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 20px;
+}
+
+.quiz-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.quiz-header h1 {
+    color: #ff80bf;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.quiz-header p {
+    font-size: 1.2rem;
+    color: #ff66b2;
+}
+
+.quiz-content {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.question {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.answer-btn {
+    background-color: #ff66b2;
+    color: white;
+    padding: 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0s ease-in-out;
+}
+
+/* Springy animation when the button is pressed */
+@keyframes springy-click {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.answer-btn:active {
+    animation: springy-click 0.4s ease-in-out;
+}
+
+.answer-btn:hover {
+    background-color: #ff3385;
+}
+
+.submit-btn, .retry-btn {
+    background-color: #ff80bf;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+/* Apply springy effect to submit and retry buttons on click */
+
+.submit-btn:hover, .retry-btn:hover {
+    background-color: #ff66b2;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active, .retry-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.result-container {
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.submit-btn:disabled {
+    background-color: #ff80c0aa;  /* Light gray color */
+    color: #ffffffaf;  /* Dark gray text */
+    cursor: not-allowed;  /* Change the cursor to indicate it's disabled */
+}
