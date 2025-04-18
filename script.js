@@ -1,39 +1,29 @@
+document.getElementById("start-btn").addEventListener("click", function() {
+    document.getElementById("intro-screen").style.display = "none";
+    document.querySelector(".quiz-container").style.display = "block";
+});
+
 let questions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let selectedAnswer = null;
+let selectedAnswer = null;  // Track the selected answer
 
 const submitButton = document.getElementById("submit-btn");
 
-// Fade out intro, show quiz, then load questions
-document.getElementById("start-btn").addEventListener("click", function () {
-    const intro = document.getElementById("intro-screen");
-    intro.classList.add("fade-out");
-    setTimeout(() => {
-        intro.style.display = "none";
-        const quiz = document.querySelector(".quiz-container");
-        quiz.classList.remove("hidden");
-        loadQuestions(); // Only load after intro fades out
-    }, 1000); // Match this with your fade duration
-});
+fetch('questions.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        questions = data;
+        loadQuestion(currentQuestionIndex);
+    })
+    .catch(error => console.error("Error loading questions:", error));
 
-// Load questions from JSON
-function loadQuestions() {
-    fetch('questions.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            questions = data;
-            loadQuestion(currentQuestionIndex);
-        })
-        .catch(error => console.error("Error loading questions:", error));
-}
-
-// Load current question
+// Function to load the current question
 function loadQuestion(index) {
     const questionData = questions[index];
     const questionElement = document.createElement("div");
@@ -57,44 +47,53 @@ function loadQuestion(index) {
     submitButton.classList.add("disabled");
 }
 
-// Handle answer selection/deselection
+// Function to handle answer selection/deselection
 function selectAnswer(selected) {
+    // If the same option is clicked again, deselect it
     if (selectedAnswer === selected) {
         selectedAnswer = null;
         resetAnswerButtons();
         submitButton.disabled = true;
         submitButton.classList.add("disabled");
     } else {
+        // Select the new option
         selectedAnswer = selected;
+        // Enable the submit button
         submitButton.disabled = false;
         submitButton.classList.remove("disabled");
+        
+        // Reset any previous answer button styles
         resetAnswerButtons();
+
+        // Highlight the selected answer
         const answerButtons = document.querySelectorAll('.answer-btn');
         answerButtons.forEach(button => {
             if (button.textContent === selected) {
-                button.style.backgroundColor = '#ff3385';
+                button.style.backgroundColor = '#ff3385'; // Highlight selected answer
             }
         });
     }
 }
 
-// Reset answer button styles
+// Function to reset all answer buttons' styles
 function resetAnswerButtons() {
     const answerButtons = document.querySelectorAll('.answer-btn');
     answerButtons.forEach(button => {
-        button.style.backgroundColor = '';
+        button.style.backgroundColor = ''; // Reset the background color after deselection or new selection
     });
 }
 
-// Check the submitted answer
+// Function to check the answer
 function checkAnswer() {
     const correctAnswer = questions[currentQuestionIndex].answer;
-
+    
     if (selectedAnswer === correctAnswer) {
         score++;
-        alert("Yippeeeee you got the question right!!!😍😍😍");
-    } else {
-        alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer + "‼️");
+        alert("Yippeeeee you got the question right!!!😍😍😍")
+    }
+    else {
+        alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer +"‼️");
+
     }
 
     currentQuestionIndex++;
@@ -105,25 +104,29 @@ function checkAnswer() {
         showResult();
     }
 
+    // Disable submit button after submission
     submitButton.disabled = true;
     submitButton.classList.add("disabled");
-    selectedAnswer = null;
+    selectedAnswer = null;  // Reset selected answer
     resetAnswerButtons();
 }
 
-// Show final result
+// Function to show the result at the end of the quiz
 function showResult() {
     const resultContainer = document.getElementById("result-container");
     const scoreElement = document.getElementById("score");
-
+    
     scoreElement.textContent = score;
-
+    
     document.getElementById("quiz-content").style.display = 'none';
     document.getElementById("submit-btn").style.display = 'none';
     resultContainer.style.display = 'block';
 }
 
-// Retry button event
+// Event listener for the submit button
+submitButton.addEventListener("click", checkAnswer);
+
+// Event listener for retrying the quiz
 document.getElementById("retry-btn").addEventListener("click", () => {
     score = 0;
     currentQuestionIndex = 0;
@@ -133,4 +136,5 @@ document.getElementById("retry-btn").addEventListener("click", () => {
     loadQuestion(currentQuestionIndex);
 });
 
-// Removed the old: loadQuestion(currentQuestionIndex);
+// Initialize the quiz
+loadQuestion(currentQuestionIndex);
