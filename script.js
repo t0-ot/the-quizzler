@@ -30,13 +30,15 @@ function loadQuestion(index) {
     questionElement.classList.add("question");
 
     questionElement.innerHTML = `
-        <h2>${questionData.question}</h2>
-        <div class="answers">
-            ${questionData.options.map(option => 
-                `<button class="answer-btn" onclick="selectAnswer('${option}')">${option}</button>`
-            ).join('')}
-        </div>
-    `;
+    <h2>${questionData.question}</h2>
+    ${questionData.image ? `<img src="${questionData.image}" alt="question image" class="question-img">` : ''}
+    <div class="answers">
+        ${questionData.options.map(option => 
+            `<button class="answer-btn" onclick="selectAnswer('${option}')">${option}</button>`
+        ).join('')}
+    </div>
+`;
+
     
     const quizContent = document.getElementById("quiz-content");
     quizContent.innerHTML = ''; // Clear previous question

@@ -12,6 +12,7 @@
     {
         "question": "Who wrote 'Romeo and Juliet'?",
         "options": ["Shakespeare", "Dickens", "Austen", "Hemingway"],
-        "answer": "Shakespeare"
+        "answer": "Shakespeare",
+        "image": "img/hart.jpg"
     }
 ]
