@@ -1,27 +1,17 @@
-const questions = [
-    {
-        question: "What is the capital of France?",
-        options: ["Berlin", "Madrid", "Paris", "Rome"],
-        answer: "Paris"
-    },
-    {
-        question: "What is 2 + 2?",
-        options: ["3", "4", "5", "6"],
-        answer: "4"
-    },
-    {
-        question: "Who wrote 'Romeo and Juliet'?",
-        options: ["Shakespeare", "Dickens", "Austen", "Hemingway"],
-        answer: "Shakespeare"
-    },
-    // Add more questions here...
-];
-
+let questions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let selectedAnswer = null;  // Track the selected answer
 
 const submitButton = document.getElementById("submit-btn");
+
+fetch('questions.json')  // or 'questions.txt' if using plain text
+    .then(response => response.json())
+    .then(data => {
+        questions = data;
+        loadQuestion(currentQuestionIndex);
+    })
+    .catch(error => console.error("Error loading questions:", error));
 
 // Function to load the current question
 function loadQuestion(index) {
@@ -89,6 +79,11 @@ function checkAnswer() {
     
     if (selectedAnswer === correctAnswer) {
         score++;
+        alert("Yippeeeee you got the question right!!!😍😍😍")
+    }
+    else {
+        alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer +"‼️");
+
     }
 
     currentQuestionIndex++;
