@@ -91,12 +91,14 @@ function checkAnswer() {
     
     if (selectedAnswer === correctAnswer) {
         score++;
-        alert("Yippeeeee you got the question right!!!😍😍😍")
         correctSound.play();
+        alert("Yippeeeee you got the question right!!!😍😍😍")
+
     }
     else {
-        alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer +"‼️");
         incorrectSound.play();
+        alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer +"‼️");
+
     }
 
     currentQuestionIndex++;
