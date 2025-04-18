@@ -5,8 +5,13 @@ let selectedAnswer = null;  // Track the selected answer
 
 const submitButton = document.getElementById("submit-btn");
 
-fetch('questions.json')  // or 'questions.txt' if using plain text
-    .then(response => response.json())
+fetch('questions.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         questions = data;
         loadQuestion(currentQuestionIndex);
