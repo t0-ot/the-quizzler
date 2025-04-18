@@ -8,6 +8,10 @@ body {
     background-color: #ffebf1;
     font-family: 'Arial', sans-serif;
     color: #333;
+    background-image: url(img/hart.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .quiz-footer {
@@ -19,11 +23,11 @@ body {
 
 .quiz-container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 55px auto;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 100px;
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
@@ -123,6 +127,12 @@ body {
 
 .result-container {
     display: none;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 55px;
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     margin-top: 30px;
 }
