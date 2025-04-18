@@ -1,3 +1,8 @@
+document.getElementById("start-btn").addEventListener("click", function() {
+    document.getElementById("intro-screen").style.display = "none";
+    document.querySelector(".quiz-container").style.display = "block";
+});
+
 let questions = [];
 let currentQuestionIndex = 0;
 let score = 0;
