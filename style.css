@@ -63,43 +63,51 @@ body {
 }
 
 .answer-btn {
-    background-color: #ff66b2;
-    color: white;
-    padding: 15px;
-    margin: 5px;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 14px 20px;
+    font-size: 1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
+    background-color: #f3f3f3;
+    color: #333;
+    transition: all 0.25s ease;
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.3s ease-in-out;
-    animation: fadeIn 0s ease-in-out;
-}
-
-/* Springy animation when the button is pressed */
-@keyframes springy-click {
-    0% {
-        transform: scale(1);
-    }
-    30% {
-        transform: scale(0.9);
-    }
-    50% {
-        transform: scale(0.8);
-    }
-    70% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.answer-btn:active {
-    animation: springy-click 0.4s ease-in-out;
+    position: relative;
+    z-index: 1;
 }
 
 .answer-btn:hover {
+    transform: scale(1.05);
+    z-index: 2;
+    background-color: #ffe6f0;
+    animation: pop-hover 0.3s ease-out forwards;
+}
+  
+  @keyframes pop-hover {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.07);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+}
+
+.answer-btn.selected {
     background-color: #ff3385;
+    color: white;
+    font-weight: bold;
+    transform: scale(1.07);
+    z-index: 2;
+}
+
+  .answer-btn.dimmed {
+    transform: scale(0.95);
+    opacity: 0.7;
 }
 
 .submit-btn, .retry-btn {

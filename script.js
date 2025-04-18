@@ -51,28 +51,25 @@ function loadQuestion(index) {
 
 // Function to handle answer selection/deselection
 function selectAnswer(selected) {
-    // If the same option is clicked again, deselect it
+    const answerButtons = document.querySelectorAll('.answer-btn');
+
     if (selectedAnswer === selected) {
+        // Deselect if clicked again
         selectedAnswer = null;
-        resetAnswerButtons();
+        answerButtons.forEach(button => {
+            button.classList.remove("selected", "dimmed");
+        });
         submitButton.disabled = true;
         submitButton.classList.add("disabled");
     } else {
-        // Select the new option
         selectedAnswer = selected;
-        // Enable the submit button
         submitButton.disabled = false;
         submitButton.classList.remove("disabled");
-        
-        // Reset any previous answer button styles
-        resetAnswerButtons();
 
-        // Highlight the selected answer
-        const answerButtons = document.querySelectorAll('.answer-btn');
         answerButtons.forEach(button => {
-            if (button.textContent === selected) {
-                button.style.backgroundColor = '#ff3385'; // Highlight selected answer
-            }
+            const isSelected = button.textContent === selected;
+            button.classList.toggle("selected", isSelected);
+            button.classList.toggle("dimmed", !isSelected);
         });
     }
 }
