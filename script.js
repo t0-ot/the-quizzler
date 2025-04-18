@@ -86,14 +86,17 @@ function resetAnswerButtons() {
 // Function to check the answer
 function checkAnswer() {
     const correctAnswer = questions[currentQuestionIndex].answer;
+    const correctSound = new Audio ('https://www.myinstants.com/media/sounds/extremely-loud-correct-buzzer.mp3');
+    const incorrectSound = new Audio ('https://www.myinstants.com/media/sounds/extremely-loud-incorrect-buzzer_0cDaG20.mp3');
     
     if (selectedAnswer === correctAnswer) {
         score++;
         alert("Yippeeeee you got the question right!!!😍😍😍")
+        correctSound.play();
     }
     else {
         alert("You got it wrong honey😔😔😔\nThe correct answer was: " + correctAnswer +"‼️");
-
+        incorrectSound.play();
     }
 
     currentQuestionIndex++;
