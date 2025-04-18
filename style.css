@@ -33,7 +33,7 @@ body {
 
 .quiz-header h1 {
     color: #ff80bf;
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 10px;
     animation: fadeIn 1s ease-in-out;
 }
